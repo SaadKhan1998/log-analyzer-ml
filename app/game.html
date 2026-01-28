@@ -1,0 +1,779 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Dustfront Ops - Tactical Briefing</title>
+    <style>
+      :root {
+        color-scheme: dark;
+        font-family: "Segoe UI", "Inter", system-ui, sans-serif;
+      }
+
+      * {
+        box-sizing: border-box;
+        margin: 0;
+        padding: 0;
+      }
+
+      body {
+        background: radial-gradient(circle at top, #2b2b2b 0%, #0f0f0f 60%, #050505 100%);
+        color: #f4eadb;
+        min-height: 100vh;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        padding: 28px 16px 56px;
+      }
+
+      header {
+        text-align: center;
+        margin-bottom: 22px;
+      }
+
+      header h1 {
+        font-size: clamp(2rem, 3vw, 2.8rem);
+        text-transform: uppercase;
+        letter-spacing: 0.14em;
+      }
+
+      header p {
+        margin-top: 12px;
+        max-width: 760px;
+        color: #dbcab0;
+        line-height: 1.6;
+      }
+
+      .top-bar {
+        width: min(1100px, 100%);
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+        gap: 14px;
+        margin-bottom: 24px;
+      }
+
+      .panel {
+        background: linear-gradient(150deg, rgba(46, 38, 27, 0.85), rgba(22, 17, 11, 0.95));
+        border: 1px solid rgba(255, 215, 140, 0.15);
+        border-radius: 16px;
+        padding: 16px 18px;
+        box-shadow: 0 12px 28px rgba(0, 0, 0, 0.35);
+      }
+
+      .panel h2 {
+        font-size: 1rem;
+        text-transform: uppercase;
+        letter-spacing: 0.12em;
+        margin-bottom: 10px;
+        color: #f2e0c0;
+      }
+
+      .scoreboard {
+        display: grid;
+        gap: 8px;
+        font-size: 0.92rem;
+      }
+
+      .score {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 8px 10px;
+        background: rgba(255, 255, 255, 0.04);
+        border-radius: 10px;
+      }
+
+      .score strong {
+        font-size: 1.2rem;
+        color: #ffe2ae;
+      }
+
+      .hud-tags {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 8px;
+      }
+
+      .hud-tags span {
+        padding: 6px 10px;
+        background: rgba(255, 215, 140, 0.08);
+        border-radius: 999px;
+        font-size: 0.75rem;
+        text-transform: uppercase;
+        letter-spacing: 0.08em;
+      }
+
+      .layout {
+        width: min(1200px, 100%);
+        display: grid;
+        gap: 20px;
+        grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      }
+
+      .play-shell {
+        background: rgba(12, 12, 12, 0.8);
+        border-radius: 18px;
+        border: 1px solid rgba(255, 255, 255, 0.1);
+        padding: 16px;
+        display: grid;
+        gap: 12px;
+      }
+
+      .play-shell h2 {
+        font-size: 1rem;
+        text-transform: uppercase;
+        letter-spacing: 0.12em;
+        color: #f2e0c0;
+      }
+
+      .arena {
+        position: relative;
+        width: 100%;
+        aspect-ratio: 16 / 9;
+        border-radius: 14px;
+        overflow: hidden;
+        border: 1px solid rgba(255, 255, 255, 0.12);
+        background: radial-gradient(circle at 20% 20%, #2d2d2d 0%, #161616 50%, #0b0b0b 100%);
+      }
+
+      canvas {
+        width: 100%;
+        height: 100%;
+        display: block;
+      }
+
+      .controls {
+        display: grid;
+        gap: 10px;
+        font-size: 0.9rem;
+        color: #e5d3b5;
+      }
+
+      .controls .keys {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 8px;
+      }
+
+      .controls .keys span {
+        padding: 6px 10px;
+        border-radius: 999px;
+        background: rgba(255, 215, 140, 0.1);
+        font-size: 0.75rem;
+        text-transform: uppercase;
+        letter-spacing: 0.08em;
+      }
+
+      .status-line {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 12px;
+        font-size: 0.82rem;
+      }
+
+      .status-line span {
+        padding: 6px 10px;
+        border-radius: 10px;
+        background: rgba(255, 255, 255, 0.05);
+      }
+
+      .map-shell {
+        background: linear-gradient(135deg, rgba(72, 59, 41, 0.9), rgba(27, 21, 14, 0.95));
+        border-radius: 22px;
+        padding: 20px;
+        box-shadow: inset 0 0 35px rgba(0, 0, 0, 0.6), 0 18px 32px rgba(0, 0, 0, 0.35);
+      }
+
+      .map-title {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-bottom: 14px;
+        text-transform: uppercase;
+        font-size: 0.85rem;
+        letter-spacing: 0.2em;
+      }
+
+      .map-grid {
+        display: grid;
+        grid-template-columns: repeat(6, 1fr);
+        grid-template-rows: repeat(5, minmax(68px, 1fr));
+        gap: 10px;
+        background: linear-gradient(135deg, #ccb08e, #c29a62);
+        border-radius: 18px;
+        padding: 14px;
+        position: relative;
+        overflow: hidden;
+      }
+
+      .zone {
+        border-radius: 12px;
+        border: 2px solid rgba(58, 44, 28, 0.6);
+        background: rgba(91, 70, 44, 0.55);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        text-align: center;
+        padding: 8px;
+        font-size: 0.78rem;
+        font-weight: 600;
+        text-transform: uppercase;
+        color: #2d2012;
+        box-shadow: inset 0 0 10px rgba(0, 0, 0, 0.25);
+      }
+
+      .zone.main {
+        background: rgba(212, 177, 120, 0.75);
+      }
+
+      .spawn {
+        background: rgba(27, 43, 29, 0.85);
+        color: #e1f4dc;
+      }
+
+      .bombsite {
+        background: rgba(108, 36, 26, 0.85);
+        color: #ffe7e1;
+      }
+
+      .route {
+        background: rgba(50, 72, 115, 0.75);
+        color: #e1efff;
+      }
+
+      .callouts {
+        margin-top: 18px;
+        display: grid;
+        gap: 8px;
+        color: #f1dcc0;
+        font-size: 0.92rem;
+        line-height: 1.5;
+      }
+
+      .legend {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 10px;
+        margin-top: 12px;
+      }
+
+      .legend span {
+        padding: 6px 10px;
+        border-radius: 999px;
+        font-size: 0.72rem;
+        text-transform: uppercase;
+        letter-spacing: 0.08em;
+        background: rgba(255, 255, 255, 0.08);
+      }
+
+      .team-card {
+        display: grid;
+        gap: 14px;
+      }
+
+      .squad {
+        padding: 14px 16px;
+        border-radius: 14px;
+        background: rgba(15, 15, 15, 0.4);
+        border: 1px solid rgba(255, 255, 255, 0.08);
+      }
+
+      .squad h3 {
+        font-size: 1rem;
+        text-transform: uppercase;
+        letter-spacing: 0.1em;
+        margin-bottom: 10px;
+      }
+
+      .squad ul {
+        list-style: none;
+        display: grid;
+        gap: 6px;
+        font-size: 0.9rem;
+      }
+
+      .loadout {
+        display: grid;
+        gap: 10px;
+        font-size: 0.88rem;
+      }
+
+      .loadout div {
+        padding: 10px 12px;
+        border-radius: 10px;
+        background: rgba(255, 255, 255, 0.04);
+      }
+
+      footer {
+        margin-top: 26px;
+        font-size: 0.82rem;
+        color: #bda88a;
+      }
+    </style>
+  </head>
+  <body>
+    <header>
+      <h1>Dustfront Ops</h1>
+      <p>
+        A tactical showdown inspired by classic desert combat zones. Team A
+        locks down the ancient district while Team B pushes through catwalks,
+        tunnels, and the mid plaza to plant the charge.
+      </p>
+    </header>
+
+    <section class="top-bar">
+      <div class="panel">
+        <h2>Live Scoreboard</h2>
+        <div class="scoreboard">
+          <div class="score">
+            <span>Team A — Vanguards</span>
+            <strong>7</strong>
+          </div>
+          <div class="score">
+            <span>Team B — Shadows</span>
+            <strong>6</strong>
+          </div>
+          <div class="score">
+            <span>Round Timer</span>
+            <strong>01:24</strong>
+          </div>
+        </div>
+      </div>
+      <div class="panel">
+        <h2>Match Intel</h2>
+        <div class="hud-tags">
+          <span>Mode: 5v5 Tactical</span>
+          <span>Objective: Plant / Defuse</span>
+          <span>Map: Dustfront District</span>
+          <span>Economy: Classic</span>
+        </div>
+      </div>
+      <div class="panel">
+        <h2>Kill Feed</h2>
+        <div class="scoreboard">
+          <div class="score">Nova ➜ Viper</div>
+          <div class="score">Ghost ➜ Atlas</div>
+          <div class="score">Echo ➜ Wisp</div>
+        </div>
+      </div>
+    </section>
+
+    <section class="layout">
+      <article class="map-shell">
+        <div class="map-title">
+          <span>Map Overview</span>
+          <span>Dustfront Sector</span>
+        </div>
+        <div class="map-grid">
+          <div class="zone spawn" style="grid-column: 1 / 3; grid-row: 1 / 2">
+            Team A Spawn
+          </div>
+          <div class="zone route" style="grid-column: 3 / 5; grid-row: 1 / 2">
+            Upper Ramp
+          </div>
+          <div class="zone bombsite" style="grid-column: 5 / 7; grid-row: 1 / 3">
+            Bombsite A
+          </div>
+          <div class="zone" style="grid-column: 1 / 3; grid-row: 2 / 3">
+            Courtyard
+          </div>
+          <div class="zone main" style="grid-column: 3 / 5; grid-row: 2 / 4">
+            Mid Plaza
+          </div>
+          <div class="zone route" style="grid-column: 1 / 3; grid-row: 3 / 4">
+            Catwalk
+          </div>
+          <div class="zone bombsite" style="grid-column: 5 / 7; grid-row: 3 / 5">
+            Bombsite B
+          </div>
+          <div class="zone" style="grid-column: 3 / 5; grid-row: 4 / 5">
+            Lower Tunnels
+          </div>
+          <div class="zone spawn" style="grid-column: 1 / 3; grid-row: 4 / 6">
+            Team B Spawn
+          </div>
+          <div class="zone route" style="grid-column: 3 / 5; grid-row: 5 / 6">
+            Market Alley
+          </div>
+          <div class="zone" style="grid-column: 5 / 7; grid-row: 5 / 6">
+            Defender Nest
+          </div>
+        </div>
+        <div class="callouts">
+          <strong>Key Callouts</strong>
+          <div>
+            Mid Plaza controls rotations between both bombsites; expect early
+            utility here.
+          </div>
+          <div>
+            Catwalk offers Team B a fast pressure lane into Bombsite A.
+          </div>
+          <div>
+            Lower Tunnels stay dark and quiet for stealthy B-site hits.
+          </div>
+          <div class="legend">
+            <span>Spawn Zones</span>
+            <span>Bombsites</span>
+            <span>Rotation Paths</span>
+            <span>Mid Control</span>
+          </div>
+        </div>
+      </article>
+
+      <aside class="team-card">
+        <div class="panel">
+          <h2>Team A — Vanguards</h2>
+          <div class="squad">
+            <h3>Squad Roles</h3>
+            <ul>
+              <li>Captain: Nova (AR / Anchor)</li>
+              <li>Support: Atlas (SMG / Utility)</li>
+              <li>Scout: Ember (Sniper / Mid)</li>
+              <li>Anchor: Echo (Flex / Site)</li>
+            </ul>
+          </div>
+        </div>
+        <div class="panel">
+          <h2>Team B — Shadows</h2>
+          <div class="squad">
+            <h3>Squad Roles</h3>
+            <ul>
+              <li>Leader: Rook (Entry)</li>
+              <li>Entry: Viper (Shotcaller)</li>
+              <li>Intel: Ghost (Recon)</li>
+              <li>Flank: Wisp (Lurker)</li>
+            </ul>
+          </div>
+        </div>
+        <div class="panel">
+          <h2>Loadout Draft</h2>
+          <div class="loadout">
+            <div>Primary: M4A1 / AK-47</div>
+            <div>Secondary: Sidearm + Flash</div>
+            <div>Utility: Smoke / Frag / Drone</div>
+            <div>Perks: Ghost, Tracker, Fast Swap</div>
+          </div>
+        </div>
+      </aside>
+    </section>
+
+    <section class="layout">
+      <div class="play-shell">
+        <h2>Playable Demo Arena</h2>
+        <div class="arena">
+          <canvas id="arenaCanvas" width="960" height="540"></canvas>
+        </div>
+        <div class="controls">
+          <div class="keys">
+            <span>W / A / S / D move</span>
+            <span>Mouse aim</span>
+            <span>Click shoot</span>
+            <span>Shift sprint</span>
+            <span>R restart</span>
+          </div>
+          <div class="status-line">
+            <span id="teamScore">Team A 0 | Team B 0</span>
+            <span id="roundStatus">Hold mid and clear targets.</span>
+          </div>
+          <div>
+            Capture control nodes (A and B) and clear enemy drones. This is a
+            lightweight prototype for playtesting the Dustfront layout.
+          </div>
+        </div>
+      </div>
+      <div class="panel">
+        <h2>Objective Brief</h2>
+        <div class="scoreboard">
+          <div class="score">Secure Mid Plaza control node.</div>
+          <div class="score">Sweep lower tunnels and rotate fast.</div>
+          <div class="score">Hold Bombsite B while Team B pushes catwalk.</div>
+          <div class="score">First team to 10 points wins.</div>
+        </div>
+        <div class="legend">
+          <span>Green = Team A</span>
+          <span>Red = Team B</span>
+          <span>Gold = Control Node</span>
+        </div>
+      </div>
+    </section>
+
+    <footer>Ready up, lock your lane, and hold the dustline.</footer>
+    <script>
+      const canvas = document.getElementById("arenaCanvas");
+      const ctx = canvas.getContext("2d");
+      const teamScore = document.getElementById("teamScore");
+      const roundStatus = document.getElementById("roundStatus");
+
+      const state = {
+        width: canvas.width,
+        height: canvas.height,
+        keys: new Set(),
+        mouse: { x: canvas.width / 2, y: canvas.height / 2 },
+        bullets: [],
+        enemies: [],
+        controlNodes: [
+          { x: 220, y: 180, radius: 32, owner: "neutral" },
+          { x: 700, y: 360, radius: 32, owner: "neutral" }
+        ],
+        player: {
+          x: canvas.width / 2,
+          y: canvas.height / 2,
+          radius: 14,
+          speed: 2.2,
+          sprint: 3.4,
+          health: 100
+        },
+        scoreA: 0,
+        scoreB: 0,
+        frame: 0,
+        running: true
+      };
+
+      const spawnEnemy = () => {
+        const edge = Math.floor(Math.random() * 4);
+        let x = 0;
+        let y = 0;
+        if (edge === 0) {
+          x = Math.random() * canvas.width;
+          y = -20;
+        } else if (edge === 1) {
+          x = canvas.width + 20;
+          y = Math.random() * canvas.height;
+        } else if (edge === 2) {
+          x = Math.random() * canvas.width;
+          y = canvas.height + 20;
+        } else {
+          x = -20;
+          y = Math.random() * canvas.height;
+        }
+        state.enemies.push({
+          x,
+          y,
+          radius: 12,
+          speed: 1.4 + Math.random() * 0.8,
+          health: 2
+        });
+      };
+
+      const resetGame = () => {
+        state.player.x = canvas.width / 2;
+        state.player.y = canvas.height / 2;
+        state.player.health = 100;
+        state.bullets = [];
+        state.enemies = [];
+        state.controlNodes.forEach((node) => {
+          node.owner = "neutral";
+        });
+        state.scoreA = 0;
+        state.scoreB = 0;
+        state.frame = 0;
+        state.running = true;
+        roundStatus.textContent = "Hold mid and clear targets.";
+      };
+
+      const clamp = (value, min, max) => Math.min(Math.max(value, min), max);
+
+      const handleInput = () => {
+        const player = state.player;
+        const isSprinting = state.keys.has("Shift");
+        const speed = isSprinting ? player.sprint : player.speed;
+        let dx = 0;
+        let dy = 0;
+        if (state.keys.has("w")) dy -= 1;
+        if (state.keys.has("s")) dy += 1;
+        if (state.keys.has("a")) dx -= 1;
+        if (state.keys.has("d")) dx += 1;
+        if (dx || dy) {
+          const length = Math.hypot(dx, dy) || 1;
+          player.x += (dx / length) * speed;
+          player.y += (dy / length) * speed;
+        }
+        player.x = clamp(player.x, player.radius, canvas.width - player.radius);
+        player.y = clamp(player.y, player.radius, canvas.height - player.radius);
+      };
+
+      const shoot = () => {
+        const angle = Math.atan2(state.mouse.y - state.player.y, state.mouse.x - state.player.x);
+        state.bullets.push({
+          x: state.player.x,
+          y: state.player.y,
+          vx: Math.cos(angle) * 6,
+          vy: Math.sin(angle) * 6,
+          life: 70
+        });
+      };
+
+      const updateBullets = () => {
+        state.bullets = state.bullets
+          .map((bullet) => ({
+            ...bullet,
+            x: bullet.x + bullet.vx,
+            y: bullet.y + bullet.vy,
+            life: bullet.life - 1
+          }))
+          .filter((bullet) => bullet.life > 0);
+      };
+
+      const updateEnemies = () => {
+        const player = state.player;
+        state.enemies.forEach((enemy) => {
+          const angle = Math.atan2(player.y - enemy.y, player.x - enemy.x);
+          enemy.x += Math.cos(angle) * enemy.speed;
+          enemy.y += Math.sin(angle) * enemy.speed;
+        });
+      };
+
+      const handleCollisions = () => {
+        state.bullets.forEach((bullet) => {
+          state.enemies.forEach((enemy) => {
+            const distance = Math.hypot(bullet.x - enemy.x, bullet.y - enemy.y);
+            if (distance < enemy.radius) {
+              enemy.health -= 1;
+              bullet.life = 0;
+            }
+          });
+        });
+        state.enemies = state.enemies.filter((enemy) => enemy.health > 0);
+      };
+
+      const updateControlNodes = () => {
+        state.controlNodes.forEach((node) => {
+          const distance = Math.hypot(state.player.x - node.x, state.player.y - node.y);
+          if (distance < node.radius + state.player.radius) {
+            node.owner = "A";
+          } else if (state.enemies.some((enemy) => Math.hypot(enemy.x - node.x, enemy.y - node.y) < node.radius)) {
+            node.owner = "B";
+          }
+        });
+      };
+
+      const updateScore = () => {
+        state.controlNodes.forEach((node) => {
+          if (node.owner === "A" && state.frame % 120 === 0) {
+            state.scoreA += 1;
+          }
+          if (node.owner === "B" && state.frame % 120 === 0) {
+            state.scoreB += 1;
+          }
+        });
+        if (state.scoreA >= 10) {
+          state.running = false;
+          roundStatus.textContent = "Team A wins! Press R to restart.";
+        } else if (state.scoreB >= 10) {
+          state.running = false;
+          roundStatus.textContent = "Team B wins! Press R to restart.";
+        }
+        teamScore.textContent = `Team A ${state.scoreA} | Team B ${state.scoreB}`;
+      };
+
+      const drawArena = () => {
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
+        ctx.fillStyle = "#141414";
+        ctx.fillRect(0, 0, canvas.width, canvas.height);
+
+        state.controlNodes.forEach((node) => {
+          ctx.beginPath();
+          ctx.arc(node.x, node.y, node.radius, 0, Math.PI * 2);
+          ctx.fillStyle = node.owner === "A" ? "#3c9f62" : node.owner === "B" ? "#b8513b" : "#caa96b";
+          ctx.fill();
+          ctx.strokeStyle = "rgba(255,255,255,0.25)";
+          ctx.stroke();
+        });
+
+        state.bullets.forEach((bullet) => {
+          ctx.beginPath();
+          ctx.arc(bullet.x, bullet.y, 3, 0, Math.PI * 2);
+          ctx.fillStyle = "#f6e1a8";
+          ctx.fill();
+        });
+
+        state.enemies.forEach((enemy) => {
+          ctx.beginPath();
+          ctx.arc(enemy.x, enemy.y, enemy.radius, 0, Math.PI * 2);
+          ctx.fillStyle = "#b74d3a";
+          ctx.fill();
+        });
+
+        ctx.beginPath();
+        ctx.arc(state.player.x, state.player.y, state.player.radius, 0, Math.PI * 2);
+        ctx.fillStyle = "#46b36b";
+        ctx.fill();
+
+        ctx.beginPath();
+        ctx.moveTo(state.player.x, state.player.y);
+        ctx.lineTo(state.mouse.x, state.mouse.y);
+        ctx.strokeStyle = "rgba(255,255,255,0.25)";
+        ctx.stroke();
+
+        ctx.fillStyle = "#f7e7c3";
+        ctx.fillRect(16, 16, 140, 8);
+        ctx.fillStyle = "#a12f2f";
+        ctx.fillRect(16, 16, 140 * (1 - state.player.health / 100), 8);
+      };
+
+      const update = () => {
+        if (!state.running) {
+          drawArena();
+          requestAnimationFrame(update);
+          return;
+        }
+        state.frame += 1;
+        handleInput();
+        updateBullets();
+        updateEnemies();
+        handleCollisions();
+        updateControlNodes();
+        updateScore();
+
+        if (state.frame % 90 === 0) {
+          spawnEnemy();
+        }
+
+        if (state.enemies.some((enemy) => Math.hypot(enemy.x - state.player.x, enemy.y - state.player.y) < enemy.radius + state.player.radius)) {
+          state.player.health -= 0.6;
+          if (state.player.health <= 0) {
+            state.running = false;
+            roundStatus.textContent = "You were overwhelmed. Press R to restart.";
+          }
+        }
+
+        drawArena();
+        requestAnimationFrame(update);
+      };
+
+      window.addEventListener("keydown", (event) => {
+        if (event.key.length === 1) {
+          state.keys.add(event.key.toLowerCase());
+        } else {
+          state.keys.add(event.key);
+        }
+        if (event.key.toLowerCase() === "r") {
+          resetGame();
+        }
+      });
+
+      window.addEventListener("keyup", (event) => {
+        if (event.key.length === 1) {
+          state.keys.delete(event.key.toLowerCase());
+        } else {
+          state.keys.delete(event.key);
+        }
+      });
+
+      canvas.addEventListener("mousemove", (event) => {
+        const rect = canvas.getBoundingClientRect();
+        state.mouse.x = ((event.clientX - rect.left) / rect.width) * canvas.width;
+        state.mouse.y = ((event.clientY - rect.top) / rect.height) * canvas.height;
+      });
+
+      canvas.addEventListener("click", () => {
+        if (state.running) {
+          shoot();
+        }
+      });
+
+      resetGame();
+      update();
+    </script>
+  </body>
+</html>
