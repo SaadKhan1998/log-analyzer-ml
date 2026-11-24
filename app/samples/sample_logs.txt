@@ -1,0 +1,320 @@
+[2025-12-01 09:00:01] INFO: GET /api/products?page=5 200 60ms
+[2025-12-01 09:00:04] INFO: GET /api/orders/9779 200 14ms
+[2025-12-01 09:00:06] INFO: POST /api/cart 201 79ms
+[2025-12-01 09:00:07] INFO: GET /api/orders/8104 200 34ms
+[2025-12-01 09:00:08] INFO: GET /api/orders/7955 200 11ms
+[2025-12-01 09:00:09] DEBUG: Cache hit for key product:299
+[2025-12-01 09:00:10] INFO: POST /api/cart 201 65ms
+[2025-12-01 09:00:12] INFO: Background job sync_inventory finished in 247ms
+[2025-12-01 09:00:13] INFO: GET /api/orders/3363 200 42ms
+[2025-12-01 09:00:15] INFO: POST /api/cart 201 86ms
+[2025-12-01 09:00:16] INFO: GET /api/orders/4078 200 31ms
+[2025-12-01 09:00:18] INFO: GET /api/products?page=3 200 17ms
+[2025-12-01 09:00:21] INFO: GET /api/products?page=18 200 64ms
+[2025-12-01 09:00:24] INFO: GET /api/products?page=15 200 56ms
+[2025-12-01 09:00:26] INFO: GET /api/orders/3945 200 52ms
+[2025-12-01 09:00:30] INFO: GET /api/orders/5919 200 41ms
+[2025-12-01 09:00:33] DEBUG: Cache hit for key product:230
+[2025-12-01 09:00:34] INFO: POST /api/cart 201 24ms
+[2025-12-01 09:00:36] INFO: GET /api/products?page=6 200 53ms
+[2025-12-01 09:00:37] DEBUG: Cache hit for key product:216
+[2025-12-01 09:00:40] INFO: Background job sync_inventory finished in 279ms
+[2025-12-01 09:00:44] INFO: GET /api/products?page=12 200 73ms
+[2025-12-01 09:00:48] INFO: GET /api/orders/2533 200 25ms
+[2025-12-01 09:00:51] INFO: User 34 logged in from 10.0.0.188
+[2025-12-01 09:00:54] INFO: POST /api/cart 201 72ms
+[2025-12-01 09:00:58] INFO: User 455 logged in from 10.0.5.6
+[2025-12-01 09:01:02] INFO: GET /api/products?page=20 200 24ms
+[2025-12-01 09:01:04] INFO: GET /api/orders/5709 200 16ms
+[2025-12-01 09:01:06] INFO: GET /api/products?page=16 200 20ms
+[2025-12-01 09:01:08] INFO: GET /api/products?page=18 200 45ms
+[2025-12-01 09:01:11] INFO: User 443 logged out
+[2025-12-01 09:01:13] INFO: User 184 logged in from 10.0.6.246
+[2025-12-01 09:01:15] INFO: GET /api/orders/3887 200 17ms
+[2025-12-01 09:01:19] INFO: POST /api/cart 201 16ms
+[2025-12-01 09:01:22] INFO: User 94 logged out
+[2025-12-01 09:01:25] INFO: GET /api/orders/3386 200 34ms
+[2025-12-01 09:01:27] INFO: POST /api/cart 201 55ms
+[2025-12-01 09:01:28] INFO: User 264 logged in from 10.0.9.168
+[2025-12-01 09:01:32] INFO: GET /api/products?page=18 200 60ms
+[2025-12-01 09:01:36] INFO: GET /api/products?page=4 200 71ms
+[2025-12-01 09:01:40] INFO: GET /api/orders/2103 200 21ms
+[2025-12-01 09:01:41] INFO: GET /api/orders/6571 200 46ms
+[2025-12-01 09:01:42] INFO: GET /api/orders/3478 200 42ms
+[2025-12-01 09:01:43] DEBUG: Cache hit for key product:14
+[2025-12-01 09:01:45] DEBUG: Cache hit for key product:193
+[2025-12-01 09:01:48] INFO: POST /api/cart 201 59ms
+[2025-12-01 09:01:52] INFO: GET /api/products?page=4 200 72ms
+[2025-12-01 09:01:54] INFO: GET /api/products?page=10 200 20ms
+[2025-12-01 09:01:57] INFO: GET /api/orders/6613 200 55ms
+[2025-12-01 09:01:58] INFO: GET /api/products?page=6 200 76ms
+[2025-12-01 09:02:00] INFO: GET /api/orders/9654 200 31ms
+[2025-12-01 09:02:03] INFO: User 469 logged in from 10.0.0.195
+[2025-12-01 09:02:06] INFO: Background job sync_inventory finished in 293ms
+[2025-12-01 09:02:08] INFO: GET /api/products?page=6 200 55ms
+[2025-12-01 09:02:10] INFO: GET /api/products?page=17 200 52ms
+[2025-12-01 09:02:12] INFO: POST /api/cart 201 39ms
+[2025-12-01 09:02:14] INFO: User 379 logged out
+[2025-12-01 09:02:15] INFO: GET /api/orders/9073 200 30ms
+[2025-12-01 09:02:19] INFO: Background job sync_inventory finished in 486ms
+[2025-12-01 09:02:22] INFO: GET /api/orders/6640 200 36ms
+[2025-12-01 09:02:23] INFO: Background job sync_inventory finished in 573ms
+[2025-12-01 09:02:25] INFO: GET /api/orders/4716 200 38ms
+[2025-12-01 09:02:29] INFO: GET /api/products?page=16 200 10ms
+[2025-12-01 09:02:30] DEBUG: Cache hit for key product:177
+[2025-12-01 09:02:34] INFO: User 62 logged out
+[2025-12-01 09:02:36] INFO: User 385 logged out
+[2025-12-01 09:02:39] INFO: GET /api/products?page=6 200 65ms
+[2025-12-01 09:02:43] INFO: GET /api/orders/7485 200 37ms
+[2025-12-01 09:02:45] INFO: User 44 logged in from 10.0.2.44
+[2025-12-01 09:02:47] INFO: GET /api/orders/8624 200 59ms
+[2025-12-01 09:02:50] INFO: POST /api/cart 201 75ms
+[2025-12-01 09:02:51] INFO: GET /api/orders/9983 200 16ms
+[2025-12-01 09:02:53] INFO: GET /api/orders/2683 200 41ms
+[2025-12-01 09:02:54] INFO: GET /api/products?page=7 200 37ms
+[2025-12-01 09:02:56] INFO: GET /api/orders/5799 200 40ms
+[2025-12-01 09:03:00] INFO: User 167 logged in from 10.0.4.140
+[2025-12-01 09:03:03] INFO: User 32 logged out
+[2025-12-01 09:03:07] DEBUG: Cache hit for key product:299
+[2025-12-01 09:03:09] INFO: User 450 logged out
+[2025-12-01 09:03:10] INFO: GET /api/products?page=17 200 75ms
+[2025-12-01 09:03:11] DEBUG: Cache hit for key product:94
+[2025-12-01 09:03:13] INFO: User 77 logged out
+[2025-12-01 09:03:14] INFO: GET /api/orders/2971 200 43ms
+[2025-12-01 09:03:18] INFO: GET /api/products?page=17 200 77ms
+[2025-12-01 09:03:19] INFO: User 55 logged out
+[2025-12-01 09:03:20] INFO: GET /api/orders/5537 200 10ms
+[2025-12-01 09:03:21] INFO: GET /api/products?page=18 200 13ms
+[2025-12-01 09:03:23] INFO: GET /api/products?page=20 200 74ms
+[2025-12-01 09:03:27] INFO: User 232 logged in from 10.0.8.137
+[2025-12-01 09:03:30] INFO: GET /api/products?page=8 200 76ms
+[2025-12-01 09:03:34] DEBUG: Cache hit for key product:104
+[2025-12-01 09:03:38] INFO: GET /api/orders/2992 200 33ms
+[2025-12-01 09:03:39] INFO: GET /api/products?page=8 200 64ms
+[2025-12-01 09:03:40] INFO: GET /api/orders/5960 200 58ms
+[2025-12-01 09:03:43] DEBUG: Cache hit for key product:80
+[2025-12-01 09:03:45] INFO: GET /api/orders/3248 200 37ms
+[2025-12-01 09:03:49] INFO: User 49 logged in from 10.0.6.227
+[2025-12-01 09:03:53] INFO: GET /api/orders/4665 200 18ms
+[2025-12-01 09:03:56] WARN: Slow query on orders table took 913ms
+[2025-12-01 09:03:57] INFO: GET /api/products?page=12 200 50ms
+[2025-12-01 09:04:01] INFO: User 10 logged in from 10.0.5.142
+[2025-12-01 09:04:04] INFO: GET /api/products?page=1 200 59ms
+[2025-12-01 09:04:05] INFO: GET /api/products?page=10 200 75ms
+[2025-12-01 09:04:06] INFO: GET /api/orders/4744 200 14ms
+[2025-12-01 09:04:08] INFO: GET /api/orders/1648 200 57ms
+[2025-12-01 09:04:12] INFO: GET /api/orders/3122 200 60ms
+[2025-12-01 09:04:15] INFO: User 347 logged out
+[2025-12-01 09:04:19] INFO: GET /api/products?page=18 200 75ms
+[2025-12-01 09:04:21] INFO: User 46 logged in from 10.0.4.15
+[2025-12-01 09:04:22] INFO: GET /api/products?page=3 200 44ms
+[2025-12-01 09:04:23] INFO: POST /api/cart 201 48ms
+[2025-12-01 09:04:24] INFO: POST /api/cart 201 43ms
+[2025-12-01 09:04:25] INFO: GET /api/orders/2993 200 37ms
+[2025-12-01 09:04:28] INFO: GET /api/products?page=18 200 63ms
+[2025-12-01 09:04:30] INFO: POST /api/cart 201 20ms
+[2025-12-01 09:04:33] DEBUG: Cache hit for key product:83
+[2025-12-01 09:04:36] INFO: GET /api/orders/4305 200 27ms
+[2025-12-01 09:04:40] INFO: GET /api/products?page=7 200 47ms
+[2025-12-01 09:04:43] INFO: GET /api/products?page=6 200 44ms
+[2025-12-01 09:04:44] INFO: User 129 logged out
+[2025-12-01 09:04:46] INFO: GET /api/orders/9284 200 43ms
+[2025-12-01 09:04:47] INFO: GET /api/products?page=8 200 67ms
+[2025-12-01 09:04:51] INFO: POST /api/cart 201 70ms
+[2025-12-01 09:04:54] INFO: GET /api/products?page=13 200 74ms
+[2025-12-01 09:04:56] INFO: User 118 logged in from 10.0.5.51
+[2025-12-01 09:04:58] INFO: GET /api/products?page=12 200 16ms
+[2025-12-01 09:05:00] INFO: GET /api/orders/5187 200 35ms
+[2025-12-01 09:05:03] INFO: GET /api/orders/7240 200 40ms
+[2025-12-01 09:05:04] INFO: POST /api/cart 201 52ms
+[2025-12-01 09:05:08] INFO: GET /api/products?page=6 200 44ms
+[2025-12-01 09:05:11] INFO: GET /api/orders/6966 200 29ms
+[2025-12-01 09:05:14] INFO: GET /api/orders/6071 200 21ms
+[2025-12-01 09:05:15] INFO: GET /api/orders/6494 200 32ms
+[2025-12-01 09:05:17] INFO: GET /api/products?page=17 200 35ms
+[2025-12-01 09:05:20] INFO: GET /api/products?page=1 200 21ms
+[2025-12-01 09:05:24] INFO: User 74 logged out
+[2025-12-01 09:05:25] INFO: POST /api/cart 201 65ms
+[2025-12-01 09:05:27] INFO: GET /api/orders/4814 200 13ms
+[2025-12-01 09:05:30] INFO: POST /api/cart 201 64ms
+[2025-12-01 09:05:32] INFO: User 254 logged in from 10.0.2.73
+[2025-12-01 09:05:36] INFO: GET /api/orders/9404 200 48ms
+[2025-12-01 09:05:37] INFO: User 416 logged in from 10.0.8.36
+[2025-12-01 09:05:39] INFO: User 300 logged out
+[2025-12-01 09:05:42] INFO: GET /api/orders/1685 200 16ms
+[2025-12-01 09:05:46] INFO: Background job sync_inventory finished in 585ms
+[2025-12-01 09:05:48] INFO: POST /api/cart 201 17ms
+[2025-12-01 09:05:49] INFO: GET /api/products?page=1 200 68ms
+[2025-12-01 09:05:50] INFO: User 258 logged in from 10.0.8.24
+[2025-12-01 09:05:51] INFO: User 243 logged in from 10.0.4.208
+[2025-12-01 09:05:53] INFO: User 121 logged out
+[2025-12-01 09:05:55] ERROR: Database connection refused: postgres://db-primary:5432 (attempt 3 of 3)
+[2025-12-01 09:05:59] CRITICAL: Out of memory: worker process 4182 killed by OOM killer
+[2025-12-01 09:06:03] INFO: GET /api/products?page=13 200 19ms
+[2025-12-01 09:06:04] DEBUG: Cache hit for key product:148
+[2025-12-01 09:06:05] INFO: POST /api/cart 201 40ms
+[2025-12-01 09:06:08] INFO: POST /api/cart 201 57ms
+[2025-12-01 09:06:10] INFO: POST /api/cart 201 53ms
+[2025-12-01 09:06:13] INFO: GET /api/orders/1993 200 39ms
+[2025-12-01 09:06:15] INFO: Background job sync_inventory finished in 301ms
+[2025-12-01 09:06:19] INFO: User 149 logged in from 10.0.8.74
+[2025-12-01 09:06:21] INFO: GET /api/products?page=4 200 80ms
+[2025-12-01 09:06:22] INFO: GET /api/products?page=3 200 70ms
+[2025-12-01 09:06:26] INFO: GET /api/orders/2252 200 60ms
+[2025-12-01 09:06:28] WARN: Slow query on orders table took 896ms
+[2025-12-01 09:06:29] DEBUG: Cache hit for key product:108
+[2025-12-01 09:06:32] INFO: POST /api/cart 201 33ms
+[2025-12-01 09:06:35] INFO: Background job sync_inventory finished in 335ms
+[2025-12-01 09:06:37] DEBUG: Cache hit for key product:187
+[2025-12-01 09:06:38] INFO: GET /api/products?page=16 200 60ms
+[2025-12-01 09:06:42] INFO: GET /api/orders/9055 200 51ms
+[2025-12-01 09:06:45] INFO: GET /api/products?page=5 200 63ms
+[2025-12-01 09:06:46] INFO: GET /api/products?page=4 200 52ms
+[2025-12-01 09:06:47] INFO: GET /api/products?page=11 200 60ms
+[2025-12-01 09:06:48] DEBUG: Cache hit for key product:101
+[2025-12-01 09:06:51] DEBUG: Cache hit for key product:149
+[2025-12-01 09:06:52] INFO: GET /api/products?page=13 200 59ms
+[2025-12-01 09:06:53] INFO: GET /api/products?page=14 200 45ms
+[2025-12-01 09:06:56] INFO: GET /api/orders/1845 200 50ms
+[2025-12-01 09:06:58] INFO: POST /api/cart 201 34ms
+[2025-12-01 09:07:01] INFO: Background job sync_inventory finished in 646ms
+[2025-12-01 09:07:05] INFO: GET /api/orders/7116 200 58ms
+[2025-12-01 09:07:07] DEBUG: Cache hit for key product:205
+[2025-12-01 09:07:09] INFO: User 26 logged in from 10.0.6.116
+[2025-12-01 09:07:13] INFO: POST /api/cart 201 51ms
+[2025-12-01 09:07:17] INFO: GET /api/orders/3085 200 18ms
+[2025-12-01 09:07:20] INFO: GET /api/products?page=10 200 48ms
+[2025-12-01 09:07:22] INFO: User 500 logged in from 10.0.4.104
+[2025-12-01 09:07:23] INFO: GET /api/products?page=18 200 60ms
+[2025-12-01 09:07:25] INFO: GET /api/orders/3648 200 12ms
+[2025-12-01 09:07:27] INFO: GET /api/products?page=16 200 80ms
+[2025-12-01 09:07:31] INFO: GET /api/products?page=11 200 67ms
+[2025-12-01 09:07:32] INFO: GET /api/orders/4152 200 23ms
+[2025-12-01 09:07:34] INFO: GET /api/orders/2492 200 28ms
+[2025-12-01 09:07:35] INFO: GET /api/products?page=19 200 35ms
+[2025-12-01 09:07:37] INFO: User 212 logged in from 10.0.6.106
+[2025-12-01 09:07:41] INFO: GET /api/products?page=11 200 17ms
+[2025-12-01 09:07:43] INFO: GET /api/orders/6900 200 16ms
+[2025-12-01 09:07:47] INFO: GET /api/orders/5070 200 32ms
+[2025-12-01 09:07:50] INFO: POST /api/cart 201 70ms
+[2025-12-01 09:07:51] INFO: User 447 logged out
+[2025-12-01 09:07:55] INFO: GET /api/orders/7966 200 53ms
+[2025-12-01 09:07:56] INFO: Background job sync_inventory finished in 701ms
+[2025-12-01 09:08:00] INFO: GET /api/orders/9648 200 37ms
+[2025-12-01 09:08:02] INFO: GET /api/orders/2786 200 22ms
+[2025-12-01 09:08:06] INFO: GET /api/orders/2784 200 60ms
+[2025-12-01 09:08:08] INFO: GET /api/orders/1647 200 8ms
+[2025-12-01 09:08:11] INFO: GET /api/orders/1615 200 49ms
+[2025-12-01 09:08:14] INFO: Background job sync_inventory finished in 841ms
+[2025-12-01 09:08:15] INFO: GET /api/products?page=14 200 24ms
+[2025-12-01 09:08:17] INFO: GET /api/orders/9592 200 45ms
+[2025-12-01 09:08:18] INFO: GET /api/products?page=8 200 10ms
+[2025-12-01 09:08:21] INFO: GET /api/products?page=15 200 45ms
+[2025-12-01 09:08:25] INFO: POST /api/cart 201 46ms
+[2025-12-01 09:08:26] INFO: GET /api/products?page=18 200 41ms
+[2025-12-01 09:08:29] INFO: Background job sync_inventory finished in 865ms
+[2025-12-01 09:08:33] INFO: GET /api/orders/4180 200 39ms
+[2025-12-01 09:08:37] INFO: GET /api/orders/4732 200 50ms
+[2025-12-01 09:08:41] DEBUG: Cache hit for key product:117
+[2025-12-01 09:08:45] INFO: GET /api/orders/6538 200 53ms
+[2025-12-01 09:08:46] INFO: GET /api/products?page=13 200 35ms
+[2025-12-01 09:08:47] INFO: User 379 logged out
+[2025-12-01 09:08:49] INFO: GET /api/orders/4283 200 27ms
+[2025-12-01 09:08:52] INFO: GET /api/orders/4628 200 24ms
+[2025-12-01 09:08:54] INFO: GET /api/orders/9122 200 47ms
+[2025-12-01 09:08:58] DEBUG: Cache hit for key product:249
+[2025-12-01 09:09:00] DEBUG: Cache hit for key product:29
+[2025-12-01 09:09:02] DEBUG: Cache hit for key product:28
+[2025-12-01 09:09:03] INFO: GET /api/orders/3325 200 34ms
+[2025-12-01 09:09:06] INFO: User 95 logged in from 10.0.6.116
+[2025-12-01 09:09:08] INFO: User 41 logged in from 10.0.2.85
+[2025-12-01 09:09:10] ERROR: Unhandled exception in PaymentService.charge: NullPointerException at line 214
+[2025-12-01 09:09:14] INFO: POST /api/cart 201 82ms
+[2025-12-01 09:09:17] INFO: GET /api/orders/7203 200 31ms
+[2025-12-01 09:09:18] INFO: GET /api/products?page=4 200 10ms
+[2025-12-01 09:09:19] INFO: GET /api/orders/6758 200 34ms
+[2025-12-01 09:09:23] INFO: POST /api/cart 201 41ms
+[2025-12-01 09:09:24] INFO: GET /api/products?page=10 200 65ms
+[2025-12-01 09:09:27] INFO: GET /api/orders/8757 200 20ms
+[2025-12-01 09:09:30] INFO: GET /api/products?page=15 200 34ms
+[2025-12-01 09:09:34] INFO: GET /api/products?page=16 200 13ms
+[2025-12-01 09:09:38] INFO: GET /api/orders/7631 200 10ms
+[2025-12-01 09:09:39] INFO: GET /api/orders/2025 200 59ms
+[2025-12-01 09:09:42] INFO: GET /api/orders/2029 200 46ms
+[2025-12-01 09:09:45] INFO: GET /api/products?page=11 200 15ms
+[2025-12-01 09:09:48] INFO: User 354 logged in from 10.0.5.237
+[2025-12-01 09:09:50] INFO: GET /api/orders/2070 200 9ms
+[2025-12-01 09:09:54] INFO: GET /api/orders/8630 200 57ms
+[2025-12-01 09:09:58] INFO: User 468 logged out
+[2025-12-01 09:10:02] INFO: User 68 logged out
+[2025-12-01 09:10:04] INFO: GET /api/orders/5969 200 60ms
+[2025-12-01 09:10:07] INFO: POST /api/cart 201 56ms
+[2025-12-01 09:10:09] INFO: GET /api/products?page=20 200 20ms
+[2025-12-01 09:10:13] INFO: GET /api/products?page=6 200 41ms
+[2025-12-01 09:10:16] INFO: GET /api/orders/1554 200 38ms
+[2025-12-01 09:10:17] INFO: GET /api/orders/7988 200 14ms
+[2025-12-01 09:10:18] INFO: GET /api/orders/2377 200 21ms
+[2025-12-01 09:10:20] INFO: GET /api/products?page=15 200 32ms
+[2025-12-01 09:10:22] INFO: GET /api/orders/8551 200 47ms
+[2025-12-01 09:10:25] INFO: User 434 logged in from 10.0.1.200
+[2025-12-01 09:10:28] INFO: GET /api/orders/5385 200 31ms
+[2025-12-01 09:35:28] INFO: Background job sync_inventory finished in 412ms
+[2025-12-01 09:35:30] INFO: User 102 logged in from 10.0.7.64
+[2025-12-01 09:35:32] INFO: GET /api/orders/3512 200 26ms
+[2025-12-01 09:35:34] INFO: GET /api/products?page=13 200 42ms
+[2025-12-01 09:35:38] INFO: GET /api/products?page=8 200 22ms
+[2025-12-01 09:35:39] WARN: Slow query on orders table took 604ms
+[2025-12-01 09:35:42] INFO: GET /api/products?page=8 200 67ms
+[2025-12-01 09:35:43] INFO: GET /api/orders/5811 200 22ms
+[2025-12-01 09:35:46] INFO: GET /api/orders/4181 200 12ms
+[2025-12-01 09:35:49] INFO: GET /api/products?page=6 200 67ms
+[2025-12-01 09:35:50] INFO: User 341 logged out
+[2025-12-01 09:35:51] INFO: GET /api/orders/6729 200 21ms
+[2025-12-01 09:35:53] INFO: GET /api/products?page=5 200 15ms
+[2025-12-01 09:35:55] WARN: Slow query on orders table took 539ms
+[2025-12-01 09:35:58] INFO: User 420 logged out
+[2025-12-01 09:36:01] INFO: GET /api/products?page=12 200 33ms
+[2025-12-01 09:36:05] INFO: GET /api/orders/1515 200 58ms
+[2025-12-01 09:36:06] INFO: GET /api/products?page=3 200 62ms
+[2025-12-01 09:36:08] INFO: User 340 logged out
+[2025-12-01 09:36:10] INFO: POST /api/cart 201 26ms
+[2025-12-01 09:36:13] INFO: GET /api/products?page=9 200 62ms
+[2025-12-01 09:36:14] INFO: POST /api/cart 201 68ms
+[2025-12-01 09:36:18] INFO: GET /api/products?page=19 200 55ms
+[2025-12-01 09:36:22] INFO: GET /api/products?page=12 200 35ms
+[2025-12-01 09:36:24] INFO: User 105 logged in from 10.0.0.112
+[2025-12-01 09:36:27] INFO: GET /api/products?page=3 200 61ms
+[2025-12-01 09:36:28] INFO: GET /api/products?page=6 200 26ms
+[2025-12-01 09:36:32] INFO: GET /api/orders/3334 200 49ms
+[2025-12-01 09:36:34] INFO: GET /api/orders/7075 200 55ms
+[2025-12-01 09:36:36] INFO: GET /api/orders/5641 200 18ms
+[2025-12-01 09:36:40] DEBUG: Cache hit for key product:56
+[2025-12-01 09:36:42] INFO: GET /api/products?page=7 200 48ms
+[2025-12-01 09:36:46] INFO: User 23 logged out
+[2025-12-01 09:36:47] INFO: GET /api/products?page=20 200 59ms
+[2025-12-01 09:36:49] DEBUG: Cache hit for key product:83
+[2025-12-01 09:36:53] INFO: POST /api/cart 201 40ms
+[2025-12-01 09:36:57] INFO: GET /api/orders/4573 200 10ms
+[2025-12-01 09:37:01] DEBUG: Cache hit for key product:81
+[2025-12-01 09:37:03] INFO: GET /api/products?page=5 200 41ms
+[2025-12-01 09:37:06] INFO: GET /api/orders/1624 200 50ms
+[2025-12-01 09:37:07] WARN: TLS certificate for api.example.internal expires in 2 days
+[2025-12-01 09:37:10] INFO: GET /api/products?page=15 200 80ms
+[2025-12-01 09:37:12] INFO: POST /api/cart 201 54ms
+[2025-12-01 09:37:16] INFO: GET /api/products?page=12 200 67ms
+[2025-12-01 09:37:20] INFO: GET /api/orders/1057 200 47ms
+[2025-12-01 09:37:22] INFO: GET /api/products?page=15 200 68ms
+[2025-12-01 09:37:23] INFO: User 205 logged out
+[2025-12-01 09:37:26] INFO: GET /api/orders/6874 200 35ms
+[2025-12-01 09:37:27] INFO: GET /api/orders/8241 200 40ms
+[2025-12-01 09:37:30] INFO: GET /api/orders/3134 200 13ms
+[2025-12-01 09:37:31] INFO: User 262 logged out
+[2025-12-01 09:37:33] INFO: GET /api/orders/9256 200 32ms
+[2025-12-01 09:37:34] INFO: GET /api/orders/2087 200 47ms
+[2025-12-01 09:37:36] INFO: GET /api/orders/9058 200 26ms
+[2025-12-01 09:37:39] INFO: User 370 logged in from 10.0.3.17
+[2025-12-01 09:37:41] INFO: POST /api/cart 201 47ms
+[2025-12-01 09:37:45] INFO: GET /api/products?page=20 200 45ms
+[2025-12-01 09:37:47] INFO: GET /api/orders/9228 200 38ms
+[2025-12-01 09:37:49] INFO: POST /api/cart 201 79ms
+[2025-12-01 09:37:51] INFO: GET /api/products?page=2 200 35ms
