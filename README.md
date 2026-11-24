@@ -125,7 +125,7 @@ pytest
 
 ## License
 
-MIT License
+Released under the [MIT License](LICENSE).
 
 ## Author
 
