@@ -1,26 +1,35 @@
-from .feature_extractor import extract_features
 from .model import load_model
 
 
-def detect_anomalies(events: list[dict]) -> list[dict]:
-    """Return the events the model flags, each with an ``anomaly_score``.
+def detect_anomalies(events: list[dict]) -> tuple[list[dict], list[dict]]:
+    """Return (anomalous lines, anomalous time windows).
 
-    Scores come from IsolationForest.decision_function: negative means
-    anomalous, and lower means more anomalous. Results are sorted most
-    anomalous first. Raises ModelNotTrainedError if no model is saved.
+    Each anomalous line carries an ``anomaly_score`` from
+    IsolationForest.decision_function (negative = anomalous, lower = more
+    anomalous) and the Drain ``template`` it matched (None if unseen in
+    training). Lines are sorted most anomalous first.
+
+    Raises ModelNotTrainedError if no usable model is saved.
     """
     bundle = load_model()
     if not events:
-        return []
+        return [], []
 
-    model = bundle["model"]
-    features = extract_features(events, bundle["template_freq"])
+    model, featurizer = bundle["model"], bundle["featurizer"]
+    features = featurizer.transform(events)
     preds = model.predict(features)
     scores = model.decision_function(features)
+    templates = featurizer.templates()
+    template_ids = featurizer.template_ids(events)
 
     anomalies = [
-        {**event, "anomaly_score": round(float(score), 4)}
-        for event, pred, score in zip(events, preds, scores)
+        {
+            **event,
+            "template": templates.get(template_id),
+            "anomaly_score": round(float(score), 4),
+        }
+        for event, pred, score, template_id in zip(events, preds, scores, template_ids)
         if pred == -1
     ]
-    return sorted(anomalies, key=lambda e: e["anomaly_score"])
+    anomalies.sort(key=lambda e: e["anomaly_score"])
+    return anomalies, featurizer.window_report(events)

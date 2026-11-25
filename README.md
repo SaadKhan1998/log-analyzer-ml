@@ -1,8 +1,12 @@
 # ML Log Analyzer
 
-**Python · FastAPI · scikit-learn · pandas**
+**Python · FastAPI · scikit-learn · Drain3 · pandas**
 
 A lightweight service that parses raw application logs into structured events and flags unusual ones with an **Isolation Forest** model. You train it on a sample of your logs, then send it new logs to analyze.
+
+It catches two kinds of problems:
+- **Odd lines**: a message type never seen before, an unusual error, or a long silence.
+- **Odd periods**: a burst of messages that each look normal on their own but arrive far more often than usual, such as 30 "slow query" warnings in 30 seconds.
 
 ## Features
 
@@ -14,17 +18,23 @@ A lightweight service that parses raw application logs into structured events an
   ```
   Lines that match no format are counted and reported, not silently dropped.
 - Training and analysis use the **same** parser and features, so the model sees the same kind of data in both steps.
-- Five features per event:
+- **Log template mining with [Drain](https://github.com/logpai/Drain3).** Drain learns each message's fixed "shape" from the logs themselves. For example, `User alice logged in from web` and `User bob logged in from web` both become `User <*> logged in from web`. Numbers, IPs, hex values and UUIDs are masked first.
+- Eight features per line:
 
   | Feature | What it captures |
   |---|---|
   | `level_severity` | TRACE/DEBUG=0, INFO=1, WARN=2, ERROR=3, CRITICAL/FATAL=4 |
   | `msg_len` | Message length (timestamp and level excluded) |
-  | `template_rarity` | How unusual the message *shape* is compared with training data. Numbers, IDs, IPs and UUIDs are masked, so `User 17 logged in` and `User 42 logged in` count as the same template. |
+  | `template_rarity` | How rare the line's Drain template was in training (0 = most common, 1 = never seen) |
   | `has_failure_word` | Mentions exception, timeout, failed, refused, OOM, ... |
   | `log_gap_seconds` | log(1 + seconds since the previous event), which catches stalls and silences |
+  | `win_log_event_count` | Number of events in the last 60 seconds (traffic bursts) |
+  | `win_problem_ratio` | Share of WARN-or-worse events in the last 60 seconds |
+  | `win_repeat_ratio` | Share of the last 60 seconds that is this same template (one message suddenly repeating) |
 
-- Every anomaly comes with a score (lower = more anomalous), and results are sorted most anomalous first.
+  The window features look only at lines *before* the current one. A line without a full minute of history behind it, like the start of a batch or a short pasted snippet, gets typical values from training instead. Without that, two lines pasted on their own would look like a traffic drop. Lines without timestamps use the previous 20 lines as their window.
+- **Anomalous time windows.** Logs are split into 1-minute buckets. A bucket is flagged when its event count, warnings, errors or unseen lines are well above the busiest minutes in training (roughly 1.5× the training 99th percentile).
+- Each anomalous line comes with a score (lower = more anomalous) and the template it matched, sorted most anomalous first.
 
 ## Project structure
 
@@ -72,8 +82,11 @@ The trained model is saved to `models/model.joblib` in the project folder. Set `
 Response:
 
 ```json
-{ "status": "Model trained successfully", "events_used": 320, "unparsed_lines": 0, "distinct_templates": 12 }
+{ "status": "Model trained successfully", "events_used": 320, "unparsed_lines": 0,
+  "distinct_templates": 11, "window_detection": true }
 ```
+
+`window_detection` is `false` when the training logs have no usable timestamps. In that case the time-window report is turned off.
 
 ### `POST /analyze`
 
@@ -81,23 +94,33 @@ Response:
 { "log_text": "<raw log text>" }
 ```
 
-Response:
+Response (shortened, and combined from two runs to show both kinds of result: the anomaly comes from the sample logs, the window from a log with a burst of warnings):
 
 ```json
 {
   "anomalies": [
     { "line_number": 152, "timestamp": "2025-12-01 09:05:59", "level": "CRITICAL",
-      "message": "Out of memory: worker process 4182 killed by OOM killer", "anomaly_score": -0.1571 }
+      "message": "Out of memory: worker process 4182 killed by OOM killer",
+      "template": "Out of memory: worker process <NUM> killed by OOM killer",
+      "anomaly_score": -0.1214 }
   ],
-  "summary": { "total_events": 320, "anomalies": 7, "normal_events": 313, "unparsed_lines": 0 }
+  "windows": [
+    { "start": "2025-12-03 10:02:00", "end": "2025-12-03 10:03:00",
+      "events": 45, "warnings": 30, "errors": 0, "unseen_lines": 0,
+      "reasons": ["events: 45 (normal max ~40)", "warnings: 30 (normal max ~5)"] }
+  ],
+  "summary": { "total_events": 320, "anomalies": 7, "normal_events": 313,
+               "unparsed_lines": 0, "anomalous_windows": 1 }
 }
 ```
+
+`template` is `null` for a line that matches nothing seen in training. Window times are in UTC; timestamps without a timezone are treated as UTC.
 
 Errors:
 
 | Status | When |
 |---|---|
-| `409` | No model has been trained yet, or the saved model is from an older version (retrain it) |
+| `409` | No model has been trained yet, or the saved model is from an older version or unreadable (retrain it) |
 | `422` | No parseable lines, too little training data, or invalid parameters |
 
 ### Try it with the sample logs
@@ -118,8 +141,6 @@ pytest
 ## Future enhancements
 
 - Transformer-based log sequence modeling
-- Sliding-window temporal features, such as error rate per minute
-- Proper log template mining (Drain, Spell)
 - Kafka ingestion for streaming logs
 - Grafana dashboard for real-time monitoring
 

@@ -12,7 +12,7 @@ from app.schemas import (
 )
 from app.utils import extract_events
 
-app = FastAPI(title="ML Log Analyzer", version="1.1")
+app = FastAPI(title="ML Log Analyzer", version="1.2")
 
 
 @app.get("/")
@@ -41,7 +41,7 @@ def analyze(req: AnalyzeRequest):
         )
 
     try:
-        anomalies = detect_anomalies(parsed.events)
+        anomalies, windows = detect_anomalies(parsed.events)
     except ModelNotTrainedError as exc:
         raise HTTPException(status_code=409, detail=str(exc)) from exc
 
@@ -50,5 +50,6 @@ def analyze(req: AnalyzeRequest):
         anomalies=len(anomalies),
         normal_events=len(parsed.events) - len(anomalies),
         unparsed_lines=parsed.unparsed,
+        anomalous_windows=len(windows),
     )
-    return AnalyzeResponse(anomalies=anomalies, summary=summary)
+    return AnalyzeResponse(anomalies=anomalies, windows=windows, summary=summary)
