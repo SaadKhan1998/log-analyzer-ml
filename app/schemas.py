@@ -19,6 +19,9 @@ class TrainResponse(BaseModel):
     events_used: int
     unparsed_lines: int
     distinct_templates: int
+    window_detection: bool = Field(
+        ..., description="False when training logs had no usable timestamps."
+    )
 
 
 class Anomaly(BaseModel):
@@ -26,7 +29,20 @@ class Anomaly(BaseModel):
     timestamp: str
     level: str
     message: str
+    template: str | None = Field(
+        None, description="Drain template this line matched; null if unseen in training."
+    )
     anomaly_score: float
+
+
+class AnomalousWindow(BaseModel):
+    start: str
+    end: str
+    events: int
+    warnings: int
+    errors: int
+    unseen_lines: int = Field(..., description="Lines matching no template seen in training.")
+    reasons: list[str]
 
 
 class Summary(BaseModel):
@@ -34,8 +50,10 @@ class Summary(BaseModel):
     anomalies: int
     normal_events: int
     unparsed_lines: int
+    anomalous_windows: int
 
 
 class AnalyzeResponse(BaseModel):
     anomalies: list[Anomaly]
+    windows: list[AnomalousWindow]
     summary: Summary

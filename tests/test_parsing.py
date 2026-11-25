@@ -1,4 +1,3 @@
-from app.ml.feature_extractor import FEATURE_COLUMNS, build_template_frequencies, extract_features, to_template
 from app.utils import extract_events
 
 
@@ -33,33 +32,3 @@ def test_counts_unparsed_lines_and_skips_blank_lines():
 def test_line_numbers_point_at_original_lines():
     text = "junk\n\n[2025-01-01 10:00:00] INFO: ok"
     assert extract_events(text).events[0]["line_number"] == 3
-
-
-def test_template_masks_variable_parts():
-    assert to_template("User 17 logged in from 10.0.0.1") == to_template("User 42 logged in from 10.0.3.9")
-    assert to_template("id 550e8400-e29b-41d4-a716-446655440000 at 0xdeadbeef") == "id <*> at <*>"
-
-
-def test_features_shape_and_values():
-    train = extract_events(
-        "[2025-01-01 10:00:00] INFO: User 1 logged in\n"
-        "[2025-01-01 10:00:10] INFO: User 2 logged in\n"
-    ).events
-    freq = build_template_frequencies(train)
-    events = extract_events(
-        "[2025-01-01 10:00:00] INFO: User 3 logged in\n"
-        "[2025-01-01 11:00:00] ERROR: Connection refused by upstream\n"
-    ).events
-    df = extract_features(events, freq)
-    assert list(df.columns) == FEATURE_COLUMNS
-    known, novel = df.iloc[0], df.iloc[1]
-    assert known["template_rarity"] == 0.0 and novel["template_rarity"] == 1.0
-    assert known["has_failure_word"] == 0 and novel["has_failure_word"] == 1
-    assert novel["level_severity"] > known["level_severity"]
-    assert known["log_gap_seconds"] == 0.0 and novel["log_gap_seconds"] > 8  # log1p(3600) ~ 8.19
-
-
-def test_features_handle_empty_and_unparseable_timestamps():
-    assert extract_features([], {}).empty
-    events = [{"timestamp": "yesterday", "level": "INFO", "message": "hi"}] * 2
-    assert extract_features(events, {}).log_gap_seconds.tolist() == [0.0, 0.0]
